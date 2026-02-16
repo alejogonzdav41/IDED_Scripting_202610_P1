@@ -2,10 +2,10 @@
 {
     internal class TestMethods
     {
-        public static void SeparateElements(Queue<int> input, out Stack<int> s1, out Stack<int> s2)
+        public static void SeparateElements(Queue<int> input, out Stack<int> included, out Stack<int> excluded)
         {
-            s1 = null;
-            s2 = null;
+            included = null;
+            excluded = null;
         }
 
         public static List<int> GenerateSortedSeries(int n) => null;
