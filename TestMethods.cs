@@ -2,12 +2,6 @@
 {
     internal class TestMethods
     {
-        /*public static void SeparateElements(Queue<int> input, out Stack<int> included, out Stack<int> excluded)
-        {
-            included = null;
-            excluded = null;
-        }
-        */
         public static void SeparateElements(Queue<int> input, out Stack<int> included, out Stack<int> excluded)
         {
             included = new Stack<int>();
@@ -35,10 +29,6 @@
             if (root * root != abs)
                 return false;
 
-            // Regla de signo:
-            // raíz PAR -> positivo
-            // raíz IMPAR -> negativo
-
             if (root % 2 == 0 && value > 0)
                 return true;
 
@@ -48,15 +38,10 @@
             return false;
         }
 
-        /*
-        public static List<int> GenerateSortedSeries(int n) => null;
-        */
-
         public static List<int> GenerateSortedSeries(int n)
         {
             List<int> list = new List<int>();
 
-            // Generar desde 0 hasta n-1
             for (int i = 0; i < n; i++)
             {
                 int value = i * i;
@@ -67,7 +52,6 @@
                 list.Add(value);
             }
 
-            // Ordenamiento ascendente (sin Sort())
             for (int i = 0; i < list.Count - 1; i++)
             {
                 for (int j = 0; j < list.Count - i - 1; j++)
@@ -84,10 +68,6 @@
             return list;
         }
 
-        /*
-        public static bool FindNumberInSortedList(int target, in List<int> list) => false;
-        */
-
         public static bool FindNumberInSortedList(int target, in List<int> list)
         {
             for (int i = 0; i < list.Count; i++)
@@ -99,22 +79,10 @@
             return false;
         }
 
-        /*
-        public static int FindPrime(in Stack<int> list) => 0;
-        */
-
         public static int FindPrime(in Stack<int> list)
         {
-            Stack<int> temp = new Stack<int>();
-
-            // Invertir pila para buscar desde el "fondo"
             foreach (int value in list)
-                temp.Push(value);
-
-            while (temp.Count > 0)
             {
-                int value = temp.Pop();
-
                 if (IsPrime(value))
                     return value;
             }
@@ -122,47 +90,50 @@
             return 0;
         }
 
-        public static bool IsPrime(int n) => false;
+        public static bool IsPrime(int n)
+        {
+            if (n <= 1)
+                return false;
 
-        /*
-        public static Stack<int> RemoveFirstPrime(in Stack<int> stack) => null;
-        */
+            for (int i = 2; i < n; i++)
+            {
+                if (n % i == 0)
+                    return false;
+            }
+
+            return true;
+        }
+
         public static Stack<int> RemoveFirstPrime(in Stack<int> stack)
         {
             Stack<int> temp = new Stack<int>();
             Stack<int> result = new Stack<int>();
 
-            // Invertir
-            foreach (int value in stack)
-                temp.Push(value);
-
             bool removed = false;
 
-            while (temp.Count > 0)
+            foreach (int value in stack)
             {
-                int value = temp.Pop();
-
                 if (!removed && IsPrime(value))
                 {
                     removed = true;
                     continue;
                 }
 
-                result.Push(value);
+                temp.Push(value);
             }
+
+            while (temp.Count > 0)
+                result.Push(temp.Pop());
 
             return result;
         }
 
-        /*
-        public static Queue<int> QueueFromStack(Stack<int> stack) => null;
-        */
+
         public static Queue<int> QueueFromStack(Stack<int> stack)
         {
             Queue<int> queue = new Queue<int>();
             Stack<int> temp = new Stack<int>();
 
-            // Invertir pila
             foreach (int value in stack)
                 temp.Push(value);
 
